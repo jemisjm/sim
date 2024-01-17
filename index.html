@@ -27,14 +27,21 @@
     let counter = 0;
     let timerValue = 0;
     let exerciseTimer;
+    let startButtonClickCount = 0;
 
     function startExercise() {
-        // 운동 타이머가 이미 실행 중인 경우 중복 실행 방지
-        if (!exerciseTimer) {
-            exerciseTimer = setInterval(function() {
-                incrementTimer();
-                incrementCounter();
-            }, 1000); // 1초 간격으로 실행
+        startButtonClickCount++;
+
+        if (startButtonClickCount % 2 !== 0) {
+            // 시작 버튼이 홀수번 눌렸을 때만 실행
+            if (!exerciseTimer) {
+                exerciseTimer = setInterval(function () {
+                    incrementTimer();
+                }, 1000); // 1초 간격으로 실행
+            }
+        } else {
+            // 시작 버튼이 짝수번 눌리면 횟수 증가 및 처리
+            incrementCounter();
         }
     }
 
@@ -64,6 +71,7 @@
         timerValue = 0;
         clearInterval(exerciseTimer); // 타이머 정지
         exerciseTimer = null;
+        startButtonClickCount = 0;
         document.getElementById("setCounter").textContent = setCounter;
         document.getElementById("counter").textContent = counter;
         document.getElementById("timer").textContent = timerValue;
