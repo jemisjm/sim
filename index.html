@@ -16,12 +16,14 @@
 
 <h1>Kegel Exercise Tracker</h1>
 
-<p>올라간 횟수: <span id="counter">0</span></p>
+<p>세트: <span id="setCounter">0</span></p>
+<p>횟수: <span id="counter">0</span></p>
 <p>타이머: <span id="timer">0</span> 초</p>
 <button onclick="startExercise()">시작</button>
 <button onclick="resetExercise()">리셋</button>
 
 <script>
+    let setCounter = 0;
     let counter = 0;
     let timerValue = 0;
     let exerciseTimer;
@@ -44,13 +46,25 @@
     function incrementCounter() {
         counter++;
         document.getElementById("counter").textContent = counter;
+
+        if (counter === 10) {
+            counter = 0;
+            incrementSetCounter();
+        }
+    }
+
+    function incrementSetCounter() {
+        setCounter++;
+        document.getElementById("setCounter").textContent = setCounter;
     }
 
     function resetExercise() {
+        setCounter = 0;
         counter = 0;
         timerValue = 0;
         clearInterval(exerciseTimer); // 타이머 정지
         exerciseTimer = null;
+        document.getElementById("setCounter").textContent = setCounter;
         document.getElementById("counter").textContent = counter;
         document.getElementById("timer").textContent = timerValue;
     }
