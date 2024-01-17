@@ -27,20 +27,20 @@
     let counter = 0;
     let timerValue = 0;
     let exerciseTimer;
-    let startButtonClickCount = 0;
+    let buttonClickCount = 0;
 
     function startExercise() {
-        startButtonClickCount++;
+        buttonClickCount++;
 
-        if (startButtonClickCount % 2 !== 0) {
-            // 시작 버튼이 홀수번 눌렸을 때만 실행
+        if (buttonClickCount % 2 !== 0) {
+            // 버튼이 홀수번 눌렸을 때만 실행
             if (!exerciseTimer) {
                 exerciseTimer = setInterval(function () {
                     incrementTimer();
                 }, 1000); // 1초 간격으로 실행
             }
         } else {
-            // 시작 버튼이 짝수번 눌리면 횟수 증가 및 처리
+            // 버튼이 짝수번 눌리면 횟수 증가 및 처리
             incrementCounter();
         }
     }
@@ -74,7 +74,7 @@
         timerValue = 0;
         clearInterval(exerciseTimer); // 타이머 정지
         exerciseTimer = null;
-        startButtonClickCount = 0;
+        buttonClickCount = 0;
         document.getElementById("counter").textContent = counter;
         document.getElementById("timer").textContent = timerValue;
     }
