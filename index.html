@@ -70,11 +70,13 @@
     }
 
     function resetExercise() {
+        setCounter = 0;
         counter = 0;
         timerValue = 0;
         clearInterval(exerciseTimer); // 타이머 정지
         exerciseTimer = null;
         buttonClickCount = 0;
+        document.getElementById("setCounter").textContent = setCounter;
         document.getElementById("counter").textContent = counter;
         document.getElementById("timer").textContent = timerValue;
     }
