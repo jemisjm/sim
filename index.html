@@ -17,18 +17,28 @@
 <h1>Kegel Exercise Tracker</h1>
 
 <p>올라간 횟수: <span id="counter">0</span></p>
-<button onclick="startTimer()">시작</button>
-<button onclick="resetCounter()">리셋</button>
+<p>타이머: <span id="timer">0</span> 초</p>
+<button onclick="startExercise()">시작</button>
+<button onclick="resetExercise()">리셋</button>
 
 <script>
     let counter = 0;
-    let timer;
+    let timerValue = 0;
+    let exerciseTimer;
 
-    function startTimer() {
-        // 타이머가 이미 실행 중인 경우 중복 실행 방지
-        if (!timer) {
-            timer = setInterval(incrementCounter, 10000); // 10초 간격으로 실행
+    function startExercise() {
+        // 운동 타이머가 이미 실행 중인 경우 중복 실행 방지
+        if (!exerciseTimer) {
+            exerciseTimer = setInterval(function() {
+                incrementTimer();
+                incrementCounter();
+            }, 1000); // 1초 간격으로 실행
         }
+    }
+
+    function incrementTimer() {
+        timerValue++;
+        document.getElementById("timer").textContent = timerValue;
     }
 
     function incrementCounter() {
@@ -36,11 +46,13 @@
         document.getElementById("counter").textContent = counter;
     }
 
-    function resetCounter() {
+    function resetExercise() {
         counter = 0;
-        clearInterval(timer); // 타이머 정지
-        timer = null;
+        timerValue = 0;
+        clearInterval(exerciseTimer); // 타이머 정지
+        exerciseTimer = null;
         document.getElementById("counter").textContent = counter;
+        document.getElementById("timer").textContent = timerValue;
     }
 </script>
 
